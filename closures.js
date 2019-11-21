@@ -24,13 +24,13 @@ function outer() {
   
 // Code Here
 
-
+const inner = outer();
 
 //Once you do that, invoke inner.
 
 //Code Here
 
-
+inner();
 
 ////////// PROBLEM 2 //////////
 
@@ -53,7 +53,8 @@ function callFriend(name) {
 
 //Code Here
 
-
+const callJake = callFriend('Jake');
+callJake(435-555-9248);
 
 ////////// PROBLEM 3 //////////
 
@@ -62,7 +63,13 @@ function callFriend(name) {
 */
 
 //Code Here
-
+function makeCounter() {
+  let num=0
+  return function count() {
+    num++
+    return num;
+  }
+}
 
 
 //Uncomment this once you make your function
@@ -87,8 +94,16 @@ function callFriend(name) {
 
 function counterFactory(value) {
   // Code here.
-
+  num = value
   return {
+    inc: () => {
+      num++
+      return num;
+    },
+    dec: () => {
+      num--
+      return num;
+    }
 
   };
 }
@@ -113,13 +128,15 @@ function motivation( firstname, lastname ) {
   var welcomeText = "You're doing awesome, keep it up";
 
   // code message function here.
-
+  return function message() {
+    return "You're doing awesome, keep it up " + firstname + ' ' + lastname + '.'
+  }
   //Uncommment this to return the value of your message function
-  //return message;
+  // return message;
 }
 
 var greeting = motivation('Billy', 'Bob'); // 'You're doing awesome keep it up Billy Bob.
-
+greeting();
 
 
 ////////// PROBLEM 6 //////////
@@ -144,9 +161,13 @@ var module = (function() {
   // outside our lexical scope
   return {
     // Code here.
+    publicMethod: () => {
+      return privateMethod()
+    }
   };
 })();
 
+module.publicMethod();
 
 
 ////////// PROBLEM 7 //////////
@@ -163,6 +184,14 @@ function secretNumber() {
 
   return {
     // Code here
+    addToSecret: (num) => {
+      updatedNum = secret += num
+      return updatedNum;
+    },
+    takeAwayFromSecret: (num) => {
+      updatedNum = secret -= num
+      return updatedNum;
+    }
   };
 }
 
